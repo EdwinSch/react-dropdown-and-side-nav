@@ -3,10 +3,17 @@ import { useGlobalContext } from "../context";
 import NavLinks from "./NavLinks";
 
 const Navbar = () => {
-  const { openSidebar } = useGlobalContext();
+  const { openSidebar, setPageId } = useGlobalContext();
+
+  // hide submenu on mouse-out
+  const handleSubmenu = (event) => {
+    if (!event.target.classList.contains("nav-link")) {
+      setPageId(null);
+    }
+  };
 
   return (
-    <nav>
+    <nav onMouseOver={handleSubmenu}>
       <div className="nav-center">
         <h3>strapi</h3>
         <button className="toggle-btn" onClick={openSidebar} type="button">
